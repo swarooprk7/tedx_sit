@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "562570871689",
+    "project_id": "tedx-sit",
+    "storage_bucket": "tedx-sit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562570871689:android:77acb3bc1e376b7006d758",
+        "android_client_info": {
+          "package_name": "org.tedx.tedx_sit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562570871689-2ug728eg2pa63n7qat2pj31egkncn1gu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWXoqhsmCxYNZxJeGPoRVv4vvfeWBRWq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562570871689-2ug728eg2pa63n7qat2pj31egkncn1gu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
