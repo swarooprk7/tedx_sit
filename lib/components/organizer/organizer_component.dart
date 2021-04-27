@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tedx_sit/commons/network_image/network_image_component.dart';
 import 'package:tedx_sit/components/organizer/organizer_bean.dart';
 import 'package:tedx_sit/resources/color.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrganizerComponent extends StatefulWidget {
   OrganizerComponent({
@@ -35,12 +36,17 @@ class _OrganizerComponentState extends State<OrganizerComponent> {
                 size: widget.screenHeight * 0.2,
                 color: MyColor.primaryTheme,
               )
-            : MyNetworkImage(
-                imageURL: widget.organizersBean.imageURL,
-                totalHeight: widget.screenHeight * 0.2,
-                totalWidth: widget.screenHeight * 0.2,
-                width: widget.screenHeight * 0.2,
-                height: widget.screenHeight * 0.2,
+            : InkWell(
+                onTap: () async {
+                  launch(widget.organizersBean.linkDnURL);
+                },
+                child: MyNetworkImage(
+                  imageURL: widget.organizersBean.imageURL,
+                  totalHeight: widget.screenHeight * 0.2,
+                  totalWidth: widget.screenHeight * 0.2,
+                  width: widget.screenHeight * 0.2,
+                  height: widget.screenHeight * 0.2,
+                ),
               ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

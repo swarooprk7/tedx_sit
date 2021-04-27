@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tedx_sit/components/team_members/team_members_bean.dart';
 import 'package:tedx_sit/resources/color.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TeamMembersComponents extends StatelessWidget {
   final String heading;
@@ -101,11 +102,21 @@ class TeamMemberListBuilder extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(4.0),
                   child: InkWell(
-                    onTap: () {},
-                    child: Icon(
-                      Icons.description,
-                      color: MyColor.primaryTheme,
-                      size: 18.0,
+                    onTap: () async {
+                      await launch(linkdnID);
+                    },
+                    // child: Icon(
+                    //   Icons.description,
+                    //   color: MyColor.primaryTheme,
+                    //   size: 18.0,
+                    // ),
+                    child: Image(
+                      image: AssetImage(
+                        'assets/images/linkdn.png',
+                      ),
+                      height: 18.0,
+                      fit: BoxFit.fill,
+                      // color: MyColor.primaryTheme,
                     ),
                   ),
                 ),
