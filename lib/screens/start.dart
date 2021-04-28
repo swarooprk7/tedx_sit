@@ -46,6 +46,15 @@ class _StartState extends State<Start> {
               child: Text("Events"),
             ),
           ),
+          Container(
+            padding: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: () {
+                myNavigation.push(screen: MyRoute.sponsors, context: context);
+              },
+              child: Text("Sponsors"),
+            ),
+          ),
         ],
       ),
     );
