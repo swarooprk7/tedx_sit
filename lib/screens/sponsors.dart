@@ -5,6 +5,12 @@ import 'package:tedx_sit/components/sponsors/sponsors_components.dart';
 import 'package:tedx_sit/resources/color.dart';
 
 class SponsorScreen extends StatefulWidget {
+  final String year;
+
+  SponsorScreen({
+    this.year = '2020',
+  });
+
   @override
   _SponsorScreenState createState() => _SponsorScreenState();
 }
@@ -17,20 +23,20 @@ class _SponsorScreenState extends State<SponsorScreen> {
   List<SponsorBean> grandSponsorsList = [];
   List<SponsorBean> goldSponsorsList = [];
 
-  CollectionReference mainRef = FirebaseFirestore.instance
-      .collection('tedx_sit')
-      .doc('2020')
-      .collection('main_sponsors');
-  CollectionReference goldRef = FirebaseFirestore.instance
-      .collection('tedx_sit')
-      .doc('2020')
-      .collection('gold_sponsors');
-  CollectionReference grandRef = FirebaseFirestore.instance
-      .collection('tedx_sit')
-      .doc('2020')
-      .collection('grand_sponsors');
-
   Future<void> readData() async {
+    CollectionReference mainRef = FirebaseFirestore.instance
+        .collection('tedx_sit')
+        .doc(widget.year)
+        .collection('main_sponsors');
+    CollectionReference goldRef = FirebaseFirestore.instance
+        .collection('tedx_sit')
+        .doc(widget.year)
+        .collection('gold_sponsors');
+    CollectionReference grandRef = FirebaseFirestore.instance
+        .collection('tedx_sit')
+        .doc(widget.year)
+        .collection('grand_sponsors');
+
     await mainRef.doc('first_image').get().then((value) {
       firstImage = value.get('first_image');
     });
@@ -40,7 +46,7 @@ class _SponsorScreenState extends State<SponsorScreen> {
     await mainRef.doc('title_sponsors').get().then((value) {
       titleSponsor = value.get('title_sponsors');
     });
-    await goldRef.get().then((value) => {
+    await goldRef.orderBy('priority').get().then((value) => {
           value.docs.forEach((element) {
             SponsorBean bean = SponsorBean(
               imageURL: element['image_url'],
@@ -49,7 +55,7 @@ class _SponsorScreenState extends State<SponsorScreen> {
             goldSponsorsList.add(bean);
           })
         });
-    await grandRef.get().then((value) => {
+    await grandRef.orderBy('priority').get().then((value) => {
           value.docs.forEach((element) {
             SponsorBean bean = SponsorBean(
               imageURL: element['image_url'],
@@ -78,7 +84,7 @@ class _SponsorScreenState extends State<SponsorScreen> {
       appBar: AppBar(
         backgroundColor: MyColor.blackBG,
         title: Text(
-          'Sponsors 2020',
+          'Sponsors ' + widget.year,
           style: TextStyle(
             color: MyColor.redSecondary,
             fontSize: screenHeight * 0.035,

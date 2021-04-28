@@ -6,7 +6,9 @@ import 'package:tedx_sit/resources/color.dart';
 
 class SpeakerScreen extends StatefulWidget {
   final String year;
-  SpeakerScreen({this.year = '2020'});
+  SpeakerScreen({
+    this.year = '2020',
+  });
 
   @override
   _SpeakerScreenState createState() => _SpeakerScreenState();
@@ -52,7 +54,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
       appBar: AppBar(
         backgroundColor: MyColor.blackBG,
         title: Text(
-          'Speakers - 2020',
+          'Speakers - ${widget.year}',
           style: TextStyle(
             color: MyColor.redSecondary,
             fontSize: screenHeight * 0.035,

@@ -11,6 +11,7 @@ void main() {
       SystemUiOverlay.bottom,
     ],
   );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   runApp(MyApp());
 }
