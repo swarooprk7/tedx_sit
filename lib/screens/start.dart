@@ -37,6 +37,15 @@ class _StartState extends State<Start> {
               child: Text("Team Members"),
             ),
           ),
+          Container(
+            padding: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: () {
+                myNavigation.push(screen: MyRoute.events, context: context);
+              },
+              child: Text("Events"),
+            ),
+          ),
         ],
       ),
     );

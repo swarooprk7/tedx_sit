@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tedx_sit/resources/route.dart';
+import 'package:tedx_sit/screens/events.dart';
 import 'package:tedx_sit/screens/speaker_screen.dart';
 import 'package:tedx_sit/screens/start.dart';
 import 'package:tedx_sit/screens/team_members.dart';
@@ -14,6 +15,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => SpeakerScreen());
       case MyRoute.teamMembers:
         return MaterialPageRoute(builder: (_) => TeamMembers());
+      case MyRoute.events:
+        return MaterialPageRoute(builder: (_) => EventScreen());
 
       default:
         return MaterialPageRoute(
