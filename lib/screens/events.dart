@@ -5,6 +5,12 @@ import 'package:tedx_sit/components/event/event_component.dart';
 import 'package:tedx_sit/resources/color.dart';
 
 class EventScreen extends StatefulWidget {
+  final String year;
+
+  EventScreen({
+    this.year = '2019',
+  });
+
   @override
   _EventScreenState createState() => _EventScreenState();
 }
@@ -17,11 +23,11 @@ class _EventScreenState extends State<EventScreen> {
   Future<void> readData() async {
     CollectionReference eventRef = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc('2019')
+        .doc(widget.year)
         .collection('events');
     CollectionReference themeRef = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc('2019')
+        .doc(widget.year)
         .collection('theme');
 
     await eventRef.orderBy('priority').get().then((value) {
@@ -60,7 +66,7 @@ class _EventScreenState extends State<EventScreen> {
       appBar: AppBar(
         backgroundColor: MyColor.blackBG,
         title: Text(
-          'Event logo',
+          'Events  ' + widget.year,
           style: TextStyle(
             color: MyColor.redSecondary,
             fontSize: screenHeight * 0.035,
@@ -79,7 +85,8 @@ class _EventScreenState extends State<EventScreen> {
                         BuildText(
                             screenHeight: screenHeight,
                             lhs: 'TEDx',
-                            rhs: 'SiddagangaInstituteofTechnology - 2019'),
+                            rhs:
+                                'SiddagangaInstituteofTechnology - ${widget.year}'),
                         SizedBox(height: 10.0),
                         BuildText(
                             screenHeight: screenHeight,

@@ -9,7 +9,9 @@ import 'package:tedx_sit/resources/color.dart';
 
 class TeamMembers extends StatefulWidget {
   final String year;
-  TeamMembers({this.year = '2020'});
+  TeamMembers({
+    this.year = '2020',
+  });
 
   @override
   _TeamMembersState createState() => _TeamMembersState();
