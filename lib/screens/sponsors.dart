@@ -78,7 +78,7 @@ class _SponsorScreenState extends State<SponsorScreen> {
       appBar: AppBar(
         backgroundColor: MyColor.blackBG,
         title: Text(
-          'Event logo',
+          'Sponsors 2020',
           style: TextStyle(
             color: MyColor.redSecondary,
             fontSize: screenHeight * 0.035,
