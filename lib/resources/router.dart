@@ -21,7 +21,10 @@ class MyRouter {
       case MyRoute.events:
         return MaterialPageRoute(builder: (_) => EventScreen());
       case MyRoute.sponsors:
-        return MaterialPageRoute(builder: (_) => SponsorScreen());
+        return MaterialPageRoute(
+            builder: (_) => SponsorScreen(
+                  year: '2020',
+                ));
       case MyRoute.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case MyRoute.contactUs:
