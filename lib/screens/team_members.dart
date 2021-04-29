@@ -13,7 +13,7 @@ class TeamMembers extends StatefulWidget {
 }
 
 class _TeamMembersState extends State<TeamMembers> {
-  String documentName = '2020';
+  String documentName = 'team_members';
   String aboutUsData;
   bool dataArrived = false;
   OrganizersBean organizersBean;
