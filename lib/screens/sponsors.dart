@@ -6,10 +6,7 @@ import 'package:tedx_sit/resources/color.dart';
 
 class SponsorScreen extends StatefulWidget {
   final String year;
-
-  SponsorScreen({
-    this.year = '2020',
-  });
+  SponsorScreen({this.year});
 
   @override
   _SponsorScreenState createState() => _SponsorScreenState();

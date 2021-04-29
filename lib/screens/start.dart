@@ -58,9 +58,9 @@ class _StartState extends State<Start> {
           Container(
             padding: EdgeInsets.all(16),
             child: ElevatedButton(
-              onPressed: () {
-                myNavigation.push(screen: MyRoute.contactUs, context: context);
-              },
+              // onPressed: () {
+              //   myNavigation.push(screen: MyRoute.contactUs, context: context);
+              // },
               child: Text("Contact Us"),
             ),
           ),
