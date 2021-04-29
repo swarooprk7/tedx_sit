@@ -5,9 +5,6 @@ import 'package:tedx_sit/components/sponsors/sponsors_components.dart';
 import 'package:tedx_sit/resources/color.dart';
 
 class SponsorScreen extends StatefulWidget {
-  final String year;
-  SponsorScreen({this.year});
-
   @override
   _SponsorScreenState createState() => _SponsorScreenState();
 }
@@ -23,15 +20,15 @@ class _SponsorScreenState extends State<SponsorScreen> {
   Future<void> readData() async {
     CollectionReference mainRef = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc(widget.year)
+        .doc('sponsors')
         .collection('main_sponsors');
     CollectionReference goldRef = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc(widget.year)
+        .doc('sponsors')
         .collection('gold_sponsors');
     CollectionReference grandRef = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc(widget.year)
+        .doc('sponsors')
         .collection('grand_sponsors');
 
     await mainRef.doc('first_image').get().then((value) {
@@ -82,7 +79,7 @@ class _SponsorScreenState extends State<SponsorScreen> {
         centerTitle: true,
         backgroundColor: MyColor.blackBG,
         title: Text(
-          'Sponsors ' + widget.year,
+          'Our Sponsors ',
           style: TextStyle(
             color: MyColor.redSecondary,
             fontSize: screenHeight * 0.035,

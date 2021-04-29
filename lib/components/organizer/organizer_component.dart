@@ -69,32 +69,8 @@ class _OrganizerComponentState extends State<OrganizerComponent> {
                 ),
               ],
             ),
-            IconButton(
-                onPressed: () {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
-                },
-                icon: Icon(
-                  !isSelected
-                      ? Icons.keyboard_arrow_down_sharp
-                      : Icons.keyboard_arrow_up_sharp,
-                  color: MyColor.primaryTheme,
-                ))
           ],
         ),
-        if (isSelected)
-          Container(
-            padding: EdgeInsets.all(4.0),
-            margin: EdgeInsets.all(4.0),
-            child: Text(
-              widget.organizersBean.briefInfo,
-              textAlign: TextAlign.justify,
-              style: TextStyle(
-                color: MyColor.primaryTheme,
-              ),
-            ),
-          ),
         SizedBox(
           height: 10.0,
         ),

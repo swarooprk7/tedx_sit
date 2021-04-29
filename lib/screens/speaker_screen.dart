@@ -64,7 +64,10 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
       backgroundColor: MyColor.blackBG,
       body: SingleChildScrollView(
         child: Container(
-          width: screenWidth * 0.95,
+          padding: EdgeInsets.symmetric(
+            vertical: 4.0,
+            horizontal: 4.0,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

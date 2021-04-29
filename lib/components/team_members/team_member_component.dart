@@ -105,11 +105,6 @@ class TeamMemberListBuilder extends StatelessWidget {
                     onTap: () async {
                       await launch(linkdnID);
                     },
-                    // child: Icon(
-                    //   Icons.description,
-                    //   color: MyColor.primaryTheme,
-                    //   size: 18.0,
-                    // ),
                     child: Image(
                       image: AssetImage(
                         'assets/images/linkdn.png',
