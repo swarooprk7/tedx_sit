@@ -3,6 +3,7 @@ import 'package:tedx_sit/resources/route.dart';
 import 'package:tedx_sit/screens/events.dart';
 import 'package:tedx_sit/screens/home_screen.dart';
 import 'package:tedx_sit/screens/speaker_screen.dart';
+import 'package:tedx_sit/screens/sponsors.dart';
 import 'package:tedx_sit/screens/start.dart';
 import 'package:tedx_sit/screens/team_members.dart';
 
@@ -18,9 +19,9 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => TeamMembers());
       case MyRoute.events:
         return MaterialPageRoute(builder: (_) => EventScreen());
-      case MyRoute.home:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
       case MyRoute.sponsors:
+        return MaterialPageRoute(builder: (_) => SponsorScreen());
+      case MyRoute.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
 
       default:
