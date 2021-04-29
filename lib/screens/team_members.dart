@@ -111,6 +111,8 @@ class _TeamMembersState extends State<TeamMembers> {
     final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        elevation: 10,
         backgroundColor: MyColor.blackBG,
         title: Text(
           'Our Team',
@@ -122,84 +124,88 @@ class _TeamMembersState extends State<TeamMembers> {
       ),
       backgroundColor: MyColor.blackBG,
       body: SingleChildScrollView(
-        child: Container(
-          width: screenWidth * 0.95,
-          child: dataArrived == true
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(4.0),
-                          child: Text(
-                            'Meet the Organisers',
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              color: MyColor.redSecondary,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.03,
+          ),
+          child: Container(
+            child: dataArrived == true
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                            child: Text(
+                              'Meet the Organisers',
+                              style: TextStyle(
+                                fontSize: 24.0,
+                                color: MyColor.redSecondary,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(4.0),
-                          child: Text(
-                            aboutUsData,
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: MyColor.primaryTheme,
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Container(
+                            child: Text(
+                              aboutUsData,
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                letterSpacing: 1,
+                                height: 2,
+                                fontSize: screenHeight * 0.02,
+                                color: MyColor.primaryTheme,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    OrganizerComponent(
-                      screenHeight: screenHeight,
-                      screenWidth: screenWidth,
-                      organizersBean: organizersBean,
-                    ),
-                    OrganizerComponent(
-                      screenWidth: screenWidth,
-                      screenHeight: screenHeight,
-                      organizersBean: coOrganizersBean,
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    TeamMembersComponents(
-                      heading: 'Curator',
-                      dataList: curatorsList,
-                    ),
-                    TeamMembersComponents(
-                      heading: 'Budget and Finance',
-                      dataList: budgetAndFinanceList,
-                    ),
-                    TeamMembersComponents(
-                      heading: 'Marketing and Promotion',
-                      dataList: marketingAndPromotionsList,
-                    ),
-                    TeamMembersComponents(
-                      heading: 'Technical Team',
-                      dataList: technicalTeamList,
-                    ),
-                    TeamMembersComponents(
-                      heading: 'Art And Design',
-                      dataList: artAndDesignList,
-                    ),
-                    TeamMembersComponents(
-                      heading: 'Operations',
-                      dataList: operationsList,
-                    ),
-                  ],
-                )
-              : Center(child: CircularProgressIndicator()),
+                        ],
+                      ),
+                      OrganizerComponent(
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
+                        organizersBean: organizersBean,
+                      ),
+                      OrganizerComponent(
+                        screenWidth: screenWidth,
+                        screenHeight: screenHeight,
+                        organizersBean: coOrganizersBean,
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      TeamMembersComponents(
+                        heading: 'Curator',
+                        dataList: curatorsList,
+                      ),
+                      TeamMembersComponents(
+                        heading: 'Budget and Finance',
+                        dataList: budgetAndFinanceList,
+                      ),
+                      TeamMembersComponents(
+                        heading: 'Marketing and Promotion',
+                        dataList: marketingAndPromotionsList,
+                      ),
+                      TeamMembersComponents(
+                        heading: 'Technical Team',
+                        dataList: technicalTeamList,
+                      ),
+                      TeamMembersComponents(
+                        heading: 'Art And Design',
+                        dataList: artAndDesignList,
+                      ),
+                      TeamMembersComponents(
+                        heading: 'Operations',
+                        dataList: operationsList,
+                      ),
+                    ],
+                  )
+                : Center(child: CircularProgressIndicator()),
+          ),
         ),
       ),
     );

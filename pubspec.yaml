@@ -26,6 +26,9 @@ dependencies:
 # Image carousel
   carousel_pro :
 
+# Font awesome
+  font_awesome_flutter:
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

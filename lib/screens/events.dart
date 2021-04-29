@@ -64,6 +64,7 @@ class _EventScreenState extends State<EventScreen> {
     return Scaffold(
       backgroundColor: MyColor.blackBG,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: MyColor.blackBG,
         title: Text(
           'Events  ' + widget.year,
@@ -75,7 +76,9 @@ class _EventScreenState extends State<EventScreen> {
       ),
       body: dataArrived
           ? Container(
-              width: screenWidth * 0.98,
+              padding: EdgeInsets.symmetric(
+                horizontal: screenWidth * 0.03,
+              ),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -90,7 +93,7 @@ class _EventScreenState extends State<EventScreen> {
                         SizedBox(height: 10.0),
                         BuildText(
                             screenHeight: screenHeight,
-                            lhs: 'Theme- ',
+                            lhs: 'Theme: ',
                             rhs: theme),
                       ],
                     ),
