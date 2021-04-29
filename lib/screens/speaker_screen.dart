@@ -100,12 +100,18 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
         ),
         actions: [
           PopupMenuButton<String>(
+            color: MyColor.black,
             onSelected: choiceAction,
             itemBuilder: (BuildContext context) {
               return Constants.choices.map((String choice) {
                 return PopupMenuItem<String>(
                   value: choice,
-                  child: Text(choice),
+                  child: Text(
+                    choice,
+                    style: TextStyle(
+                      color: MyColor.primaryTheme,
+                    ),
+                  ),
                 );
               }).toList();
             },
