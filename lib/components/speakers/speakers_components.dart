@@ -23,6 +23,7 @@ class _SpeakerComponentState extends State<SpeakerComponent> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
     return Column(
       children: [
         SizedBox(
@@ -87,8 +88,9 @@ class _SpeakerComponentState extends State<SpeakerComponent> {
               textAlign: TextAlign.justify,
               style: TextStyle(
                 color: MyColor.primaryTheme,
-                letterSpacing: 0.4,
-                fontSize: 15.0,
+                letterSpacing: 1,
+                height: 2,
+                fontSize: screenHeight * 0.02,
               ),
             ),
           ),

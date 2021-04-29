@@ -5,4 +5,5 @@ class MyRoute {
   static const String teamMembers = '/teamMembers';
   static const String events = '/events';
   static const String sponsors = '/sponsors';
+  static const String contactUs = '/contactUs';
 }

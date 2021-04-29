@@ -82,6 +82,7 @@ class _SponsorScreenState extends State<SponsorScreen> {
     return Scaffold(
       backgroundColor: MyColor.blackBG,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: MyColor.blackBG,
         title: Text(
           'Sponsors ' + widget.year,

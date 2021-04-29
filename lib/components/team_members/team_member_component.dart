@@ -87,7 +87,7 @@ class TeamMemberListBuilder extends StatelessWidget {
                   designation,
                   style: TextStyle(
                     color: MyColor.redSecondary,
-                    fontSize: 12.0,
+                    fontSize: 14.0,
                   ),
                 ),
               ],
