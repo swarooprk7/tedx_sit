@@ -143,14 +143,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         height: 20,
                       ),
                       TeamMemberListBuilder(
-                        name: 'Swaroop R K',
-                        designation: '',
-                        linkdnID: swaroopId,
-                      ),
-                      TeamMemberListBuilder(
                         name: 'Anoop Kumar S S',
                         designation: '',
                         linkdnID: anoopId,
+                      ),
+                      TeamMemberListBuilder(
+                        name: 'Swaroop R K',
+                        designation: '',
+                        linkdnID: swaroopId,
                       ),
                       SizedBox(
                         height: 20,

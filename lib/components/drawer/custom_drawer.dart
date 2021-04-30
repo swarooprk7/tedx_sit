@@ -34,6 +34,32 @@ class CustomDrawer extends StatelessWidget {
               ),
               DrawerItem(
                 drawerItemBean: DrawerItemBean(
+                  icon: Icons.queue_play_next_outlined,
+                  title: 'Upcoming event',
+                  onTap: () {
+                    MyNavigation().pop(context: context);
+                    MyNavigation().push(
+                      context: context,
+                      screen: MyRoute.upcomingEvent,
+                    );
+                  },
+                ),
+              ),
+              DrawerItem(
+                drawerItemBean: DrawerItemBean(
+                  icon: FontAwesomeIcons.clock,
+                  title: 'Past events',
+                  onTap: () {
+                    MyNavigation().pop(context: context);
+                    MyNavigation().push(
+                      context: context,
+                      screen: MyRoute.events,
+                    );
+                  },
+                ),
+              ),
+              DrawerItem(
+                drawerItemBean: DrawerItemBean(
                   icon: FontAwesomeIcons.user,
                   title: 'Our Speakers',
                   onTap: () {
@@ -67,32 +93,6 @@ class CustomDrawer extends StatelessWidget {
                     MyNavigation().push(
                       context: context,
                       screen: MyRoute.teamMembers,
-                    );
-                  },
-                ),
-              ),
-              DrawerItem(
-                drawerItemBean: DrawerItemBean(
-                  icon: FontAwesomeIcons.clock,
-                  title: 'Past events',
-                  onTap: () {
-                    MyNavigation().pop(context: context);
-                    MyNavigation().push(
-                      context: context,
-                      screen: MyRoute.events,
-                    );
-                  },
-                ),
-              ),
-              DrawerItem(
-                drawerItemBean: DrawerItemBean(
-                  icon: Icons.queue_play_next_outlined,
-                  title: 'Upcoming event',
-                  onTap: () {
-                    MyNavigation().pop(context: context);
-                    MyNavigation().push(
-                      context: context,
-                      screen: MyRoute.upcomingEvent,
                     );
                   },
                 ),
