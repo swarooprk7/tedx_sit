@@ -64,6 +64,16 @@ class _StartState extends State<Start> {
               child: Text("Contact us"),
             ),
           ),
+          Container(
+            padding: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: () {
+                myNavigation.push(
+                    screen: MyRoute.upcomingEvent, context: context);
+              },
+              child: Text("Upcoming event"),
+            ),
+          ),
         ],
       ),
     );

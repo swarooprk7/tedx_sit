@@ -6,6 +6,7 @@ import 'package:tedx_sit/screens/speaker_screen.dart';
 import 'package:tedx_sit/screens/sponsors.dart';
 import 'package:tedx_sit/screens/start.dart';
 import 'package:tedx_sit/screens/team_members.dart';
+import 'package:tedx_sit/screens/upcoming_event_screen.dart';
 
 class MyRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -23,6 +24,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => SponsorScreen());
       case MyRoute.contactUs:
         return MaterialPageRoute(builder: (_) => ContactUsScreen());
+      case MyRoute.upcomingEvent:
+        return MaterialPageRoute(builder: (_) => UpcomingEventScreen());
 
       default:
         return MaterialPageRoute(

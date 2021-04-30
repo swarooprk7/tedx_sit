@@ -14,7 +14,7 @@ class IconInfoEventDetails extends StatelessWidget {
         Icon(
           iconInfoEventDetailsBean.icon,
           color: MyColor.redSecondary,
-          size: 80,
+          size: 70,
         ),
         SizedBox(
           height: 10,
