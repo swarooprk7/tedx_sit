@@ -8,16 +8,12 @@ import 'package:tedx_sit/components/team_members/team_members_bean.dart';
 import 'package:tedx_sit/resources/color.dart';
 
 class TeamMembers extends StatefulWidget {
-  final String year;
-  TeamMembers({
-    this.year = '2020',
-  });
-
   @override
   _TeamMembersState createState() => _TeamMembersState();
 }
 
 class _TeamMembersState extends State<TeamMembers> {
+  String documentName = 'team_members';
   String aboutUsData;
   bool dataArrived = false;
   OrganizersBean organizersBean;
@@ -34,10 +30,13 @@ class _TeamMembersState extends State<TeamMembers> {
       String collectionName, List<TeamMembersBean> dataList) async {
     CollectionReference collectionReference = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc(widget.year)
+        .doc(documentName)
         .collection('team_members');
+    print(collectionReference.toString() + '*//////////');
     DocumentReference others = collectionReference.doc('others');
+
     CollectionReference colRef = others.collection(collectionName);
+    print(colRef.toString() + '*******');
 
     await colRef.orderBy('priority').get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
@@ -55,7 +54,7 @@ class _TeamMembersState extends State<TeamMembers> {
   Future<void> readDate() async {
     CollectionReference collectionReference = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc(widget.year)
+        .doc(documentName)
         .collection('team_members');
     DocumentReference aboutUs = collectionReference.doc('about_us');
     DocumentReference organizer = collectionReference.doc('organizer');
@@ -72,7 +71,6 @@ class _TeamMembersState extends State<TeamMembers> {
         title: value.get('name'),
         description: value.get('designation'),
         imageURL: value.get('image_url'),
-        briefInfo: value.get('brief_info'),
         linkDnURL: value.get('linkdn_url'),
       );
       organizersBean = bean;
@@ -82,7 +80,6 @@ class _TeamMembersState extends State<TeamMembers> {
         title: value.get('name'),
         description: value.get('designation'),
         imageURL: value.get('image_url'),
-        briefInfo: value.get('brief_info'),
         linkDnURL: value.get('linkdn_url'),
       );
       coOrganizersBean = bean;

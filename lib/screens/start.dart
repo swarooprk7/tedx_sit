@@ -61,7 +61,16 @@ class _StartState extends State<Start> {
               onPressed: () {
                 myNavigation.push(screen: MyRoute.contactUs, context: context);
               },
-              child: Text("Contact us"),
+              child: Text("Contact Us"),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: () {
+                myNavigation.push(screen: MyRoute.home, context: context);
+              },
+              child: Text("Home Screen"),
             ),
           ),
           Container(

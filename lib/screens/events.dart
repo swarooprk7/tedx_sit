@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tedx_sit/commons/year_constant/year_constant.dart';
 import 'package:tedx_sit/components/event/event_bean.dart';
 import 'package:tedx_sit/components/event/event_component.dart';
 import 'package:tedx_sit/resources/color.dart';
@@ -17,6 +20,8 @@ class EventScreen extends StatefulWidget {
 
 class _EventScreenState extends State<EventScreen> {
   bool dataArrived = false;
+  bool noDataFound = false;
+  bool dataAbsent = true;
   String theme;
   List<EventBean> eventsList = [];
 
@@ -29,7 +34,6 @@ class _EventScreenState extends State<EventScreen> {
         .collection('tedx_sit')
         .doc(widget.year)
         .collection('theme');
-
     await eventRef.orderBy('priority').get().then((value) {
       value.docs.forEach((element) {
         EventBean bean = EventBean(
@@ -46,6 +50,13 @@ class _EventScreenState extends State<EventScreen> {
         theme = element['name'];
       });
     });
+
+    setState(() {
+      if (eventsList.isEmpty || theme.isEmpty) {
+        dataAbsent = true;
+      } else
+        dataAbsent = false;
+    });
     setState(() {
       dataArrived = true;
     });
@@ -53,12 +64,39 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   void initState() {
+    noDataFound = false;
     readData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (dataAbsent) {
+      Timer(Duration(seconds: 20), () {
+        setState(() {
+          noDataFound = true;
+        });
+      });
+    }
+    void choiceAction(String choice) {
+      if (choice == Constants.year1) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => EventScreen(year: '2019')),
+        );
+      } else if (choice == Constants.year2) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => EventScreen(year: '2020')),
+        );
+      } else if (choice == Constants.year3) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => EventScreen(year: '2021')),
+        );
+      }
+    }
+
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -73,6 +111,25 @@ class _EventScreenState extends State<EventScreen> {
             fontSize: screenHeight * 0.035,
           ),
         ),
+        actions: [
+          PopupMenuButton<String>(
+            color: MyColor.black,
+            onSelected: choiceAction,
+            itemBuilder: (BuildContext context) {
+              return Constants.choices.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(
+                    choice,
+                    style: TextStyle(
+                      color: MyColor.primaryTheme,
+                    ),
+                  ),
+                );
+              }).toList();
+            },
+          ),
+        ],
       ),
       body: dataArrived
           ? Container(
@@ -83,20 +140,21 @@ class _EventScreenState extends State<EventScreen> {
                 child: Column(
                   children: [
                     SizedBox(height: 20.0),
-                    Column(
-                      children: [
-                        BuildText(
-                            screenHeight: screenHeight,
-                            lhs: 'TEDx',
-                            rhs:
-                                'SiddagangaInstituteofTechnology - ${widget.year}'),
-                        SizedBox(height: 10.0),
-                        BuildText(
-                            screenHeight: screenHeight,
-                            lhs: 'Theme: ',
-                            rhs: theme),
-                      ],
-                    ),
+                    if (!noDataFound)
+                      Column(
+                        children: [
+                          BuildText(
+                              screenHeight: screenHeight,
+                              lhs: 'TEDx',
+                              rhs:
+                                  'SiddagangaInstituteofTechnology - ${widget.year}'),
+                          SizedBox(height: 10.0),
+                          BuildText(
+                              screenHeight: screenHeight,
+                              lhs: 'Theme: ',
+                              rhs: theme),
+                        ],
+                      ),
                     Column(
                       children: [
                         ListView.builder(
@@ -117,9 +175,15 @@ class _EventScreenState extends State<EventScreen> {
                 ),
               ),
             )
-          : Center(
-              child: CircularProgressIndicator(),
-            ),
+          : !dataAbsent
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Center(
+                  child: Text(
+                  noDataFound ? 'Sorry, No Data Found!' : 'Loading ...',
+                  style: TextStyle(color: MyColor.primaryTheme, fontSize: 16.0),
+                )),
     );
   }
 }

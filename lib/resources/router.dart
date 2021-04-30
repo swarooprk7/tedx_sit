@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tedx_sit/resources/route.dart';
 import 'package:tedx_sit/screens/contact_us_screen.dart';
 import 'package:tedx_sit/screens/events.dart';
+import 'package:tedx_sit/screens/home_screen.dart';
 import 'package:tedx_sit/screens/speaker_screen.dart';
 import 'package:tedx_sit/screens/sponsors.dart';
 import 'package:tedx_sit/screens/start.dart';
@@ -22,6 +23,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => EventScreen());
       case MyRoute.sponsors:
         return MaterialPageRoute(builder: (_) => SponsorScreen());
+      case MyRoute.home:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       case MyRoute.contactUs:
         return MaterialPageRoute(builder: (_) => ContactUsScreen());
       case MyRoute.upcomingEvent:

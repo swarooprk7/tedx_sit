@@ -31,6 +31,10 @@ class BuildEventItem extends StatelessWidget {
           child: Column(
             children: [
               Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: 2.0,
+                  horizontal: 4.0,
+                ),
                 child: CachedNetworkImage(
                   imageUrl: eventBean.imageURL,
                   height: screenHeight * 0.3,
@@ -46,6 +50,7 @@ class BuildEventItem extends StatelessWidget {
                 style: TextStyle(
                   color: MyColor.redSecondary,
                   fontSize: screenHeight * 0.028,
+                  letterSpacing: 0.8,
                 ),
               ),
               SizedBox(
@@ -59,9 +64,9 @@ class BuildEventItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: MyColor.primaryTheme,
-                    fontSize: screenHeight * 0.035,
+                    fontSize: screenHeight * 0.033,
+                    letterSpacing: 0.2,
                   ),
-                  // overflow: TextOverflow.ellipsis,
                 ),
               ),
               SizedBox(
@@ -77,7 +82,8 @@ class BuildEventItem extends StatelessWidget {
                     Text('Watch on youtube',
                         style: TextStyle(
                           color: MyColor.primaryTheme,
-                          fontSize: 16,
+                          fontSize: 14,
+                          letterSpacing: 0.8,
                         )),
                     Container(
                       padding: EdgeInsets.all(4.0),
@@ -89,9 +95,12 @@ class BuildEventItem extends StatelessWidget {
                         fit: BoxFit.fill,
                       ),
                     ),
-                    SizedBox(width: 15.0),
+                    SizedBox(width: 18.0),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10.0,
               ),
             ],
           ),
