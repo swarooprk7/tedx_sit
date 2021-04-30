@@ -1,12 +1,15 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tedx_sit/components/drawer/custom_drawer.dart';
 import 'package:tedx_sit/components/home_page_info/home_page_info.dart';
 import 'package:tedx_sit/components/home_page_info/home_page_info_bean.dart';
 import 'package:tedx_sit/components/icon_info_event_details/IconInfoEventDetails.dart';
 import 'package:tedx_sit/components/icon_info_event_details/icon_info_event_details_bean.dart';
 import 'package:tedx_sit/resources/color.dart';
+import 'package:tedx_sit/resources/navigation.dart';
 import 'package:tedx_sit/resources/resource.dart';
+import 'package:tedx_sit/resources/route.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -95,16 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(
-          child: Container(
-            color: MyColor.blackBG,
-            height: double.infinity,
-            width: double.infinity,
-            child: ListView(
-              children: [],
-            ),
-          ),
-        ),
+        drawer: CustomDrawer(),
         appBar: AppBar(
           elevation: 10,
           centerTitle: true,
@@ -316,7 +310,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                //ToDo redirect to upcoming event screen
+                                MyNavigation().push(
+                                  context: context,
+                                  screen: MyRoute.upcomingEvent,
+                                );
                               },
                               child: IconInfoEventDetails(
                                 iconInfoEventDetailsBean:

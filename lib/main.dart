@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:tedx_sit/resources/route.dart';
 import 'package:tedx_sit/resources/router.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIOverlays(
     [
@@ -12,7 +12,7 @@ void main() {
     ],
   );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateRoute: MyRouter.generateRoute,
-      initialRoute: MyRoute.start,
+      initialRoute: MyRoute.home,
       debugShowCheckedModeBanner: false,
     );
   }

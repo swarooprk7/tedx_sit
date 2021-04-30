@@ -90,6 +90,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
     final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: MyColor.blackBG,
         title: Text(
           'Speakers - ${widget.year}',
@@ -157,9 +158,11 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
                 )
               : Center(
                   child: Text(
-                  noDataFound ? 'Sorry, No Data Found!' : 'Loading ...',
-                  style: TextStyle(color: MyColor.primaryTheme, fontSize: 16.0),
-                )),
+                    noDataFound ? 'Sorry, No Data Found!' : 'Loading ...',
+                    style:
+                        TextStyle(color: MyColor.primaryTheme, fontSize: 16.0),
+                  ),
+                ),
     );
   }
 }
