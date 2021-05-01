@@ -29,12 +29,20 @@ dependencies:
 # Font awesome
   font_awesome_flutter:
 
+#flutter_native_splash
+  flutter_native_splash:
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+flutter_native_splash:
+  color: "#1D1D1D"
+  image: 'assets/images/splash_logo.png'
+  android: true
+  ios: true
 
 flutter:
 
