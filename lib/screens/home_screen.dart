@@ -1,6 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tedx_sit/components/drawer/custom_drawer.dart';
 import 'package:tedx_sit/components/home_page_info/home_page_info.dart';
 import 'package:tedx_sit/components/home_page_info/home_page_info_bean.dart';
@@ -120,6 +121,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     return SafeArea(
       child: Scaffold(
         drawer: CustomDrawer(
@@ -129,6 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
           speakerYear: speakerYear,
         ),
         appBar: AppBar(
+          brightness: Brightness.light,
           elevation: 10,
           centerTitle: true,
           backgroundColor: MyColor.blackBG,

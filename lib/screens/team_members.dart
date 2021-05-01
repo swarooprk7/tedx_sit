@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:tedx_sit/components/organizer/organizer_bean.dart';
 import 'package:tedx_sit/components/organizer/organizer_component.dart';
 import 'package:tedx_sit/components/team_members/team_member_component.dart';
@@ -101,10 +102,17 @@ class _TeamMembersState extends State<TeamMembers> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.light,
         centerTitle: true,
         elevation: 10,
         backgroundColor: MyColor.blackBG,

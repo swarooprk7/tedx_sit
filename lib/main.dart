@@ -6,10 +6,11 @@ import 'package:tedx_sit/resources/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays(
-    [
-      SystemUiOverlay.bottom,
-    ],
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.light.copyWith(
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    ),
   );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp();

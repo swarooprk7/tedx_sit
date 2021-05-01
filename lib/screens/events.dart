@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tedx_sit/components/event/event_bean.dart';
 import 'package:tedx_sit/components/event/event_component.dart';
 import 'package:tedx_sit/resources/color.dart';
@@ -61,6 +62,12 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     void choiceAction(String choice) {
       Navigator.pushReplacement(
         context,
@@ -78,6 +85,7 @@ class _EventScreenState extends State<EventScreen> {
     return Scaffold(
       backgroundColor: MyColor.blackBG,
       appBar: AppBar(
+        brightness: Brightness.light,
         centerTitle: true,
         backgroundColor: MyColor.blackBG,
         title: Text(
