@@ -94,12 +94,14 @@ class _SponsorScreenState extends State<SponsorScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: 20.0),
-                    BuildLogo(
-                      screenHeight: screenHeight,
-                      screenWidth: screenWidth,
-                      imageURL: firstImage,
-                    ),
-                    SizedBox(height: 30.0),
+                    if (firstImage.length > 3)
+                      BuildLogo(
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
+                        imageURL: firstImage,
+                      ),
+                    if (firstImage.length > 3) SizedBox(height: 50.0),
+                    SizedBox(height: 10.0),
                     if (secondImage.length > 3)
                       BuildLogo(
                         screenHeight: screenHeight,
@@ -107,12 +109,18 @@ class _SponsorScreenState extends State<SponsorScreen> {
                         imageURL: secondImage,
                       ),
                     if (secondImage.length > 3) SizedBox(height: 30.0),
+                    Text(
+                      'Title Sponsor',
+                      style: TextStyle(
+                        color: MyColor.primaryTheme,
+                        fontSize: screenHeight * 0.035,
+                      ),
+                    ),
                     BuildSponsor(
                       screenHeight: screenHeight,
                       screenWidth: screenWidth,
                       sponsorBean: SponsorBean(
                         imageURL: titleSponsor,
-                        title: 'Title Sponsor',
                       ),
                     ),
                     SizedBox(height: 60.0),
