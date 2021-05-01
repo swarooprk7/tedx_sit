@@ -120,14 +120,14 @@ class _TeamMembersState extends State<TeamMembers> {
         ),
       ),
       backgroundColor: MyColor.blackBG,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: screenWidth * 0.03,
-          ),
-          child: Container(
-            child: dataArrived == true
-                ? Column(
+      body: dataArrived
+          ? SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.03,
+                ),
+                child: Container(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -200,11 +200,22 @@ class _TeamMembersState extends State<TeamMembers> {
                         dataList: operationsList,
                       ),
                     ],
-                  )
-                : Center(child: CircularProgressIndicator()),
-          ),
-        ),
-      ),
+                  ),
+                ),
+              ),
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(MyColor.redSecondary),
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

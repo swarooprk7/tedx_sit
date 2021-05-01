@@ -5,8 +5,22 @@ import 'package:tedx_sit/components/drawer_item/drawer_item_bean.dart';
 import 'package:tedx_sit/resources/color.dart';
 import 'package:tedx_sit/resources/navigation.dart';
 import 'package:tedx_sit/resources/route.dart';
+import 'package:tedx_sit/screens/events.dart';
+import 'package:tedx_sit/screens/speakers_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
+  final String speakerYear;
+  final String eventYear;
+  final List<String> eventAllYear;
+  final List<String> speakerAllYear;
+
+  CustomDrawer({
+    this.speakerYear,
+    this.eventYear,
+    this.eventAllYear,
+    this.speakerAllYear,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -51,22 +65,30 @@ class CustomDrawer extends StatelessWidget {
                   title: 'Past events',
                   onTap: () {
                     MyNavigation().pop(context: context);
-                    MyNavigation().push(
-                      context: context,
-                      screen: MyRoute.events,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EventScreen(
+                                allYears: eventAllYear,
+                                year: eventYear,
+                              )),
                     );
                   },
                 ),
               ),
               DrawerItem(
                 drawerItemBean: DrawerItemBean(
-                  icon: FontAwesomeIcons.user,
+                  icon: FontAwesomeIcons.clock,
                   title: 'Our Speakers',
                   onTap: () {
                     MyNavigation().pop(context: context);
-                    MyNavigation().push(
-                      context: context,
-                      screen: MyRoute.speakerScreen,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SpeakerScreen(
+                                allYears: speakerAllYear,
+                                year: speakerYear,
+                              )),
                     );
                   },
                 ),

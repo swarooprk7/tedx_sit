@@ -134,8 +134,17 @@ class _SponsorScreenState extends State<SponsorScreen> {
                 ),
               ),
             )
-          : Center(
-              child: CircularProgressIndicator(),
+          : Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(MyColor.redSecondary),
+                  ),
+                ),
+              ],
             ),
     );
   }
