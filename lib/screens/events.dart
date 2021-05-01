@@ -61,18 +61,15 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('------------------------------------------' + widget.year);
-    print('------------------------------------------' +
-        widget.allYears.toString());
-
     void choiceAction(String choice) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => EventScreen(
-                  year: choice,
-                  allYears: widget.allYears,
-                )),
+          builder: (context) => EventScreen(
+            year: choice,
+            allYears: widget.allYears,
+          ),
+        ),
       );
     }
 
@@ -122,31 +119,34 @@ class _EventScreenState extends State<EventScreen> {
                     Column(
                       children: [
                         BuildText(
-                            screenHeight: screenHeight,
-                            lhs: 'TEDx',
-                            rhs:
-                                'SiddagangaInstituteofTechnology - ${widget.year}'),
+                          screenHeight: screenHeight,
+                          lhs: 'TEDx',
+                          rhs:
+                              'SiddagangaInstituteofTechnology - ${widget.year}',
+                        ),
                         SizedBox(height: 10.0),
                         BuildText(
-                            screenHeight: screenHeight,
-                            lhs: 'Theme: ',
-                            rhs: theme),
+                          screenHeight: screenHeight,
+                          lhs: 'Theme: ',
+                          rhs: theme,
+                        ),
                       ],
                     ),
                     Column(
                       children: [
                         ListView.builder(
-                            physics: ScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: eventsList.length,
-                            itemBuilder: (BuildContext ctxt, int index) {
-                              return BuildEventItem(
-                                eventBean: eventsList[index],
-                                screenWidth: screenWidth,
-                                screenHeight: screenHeight,
-                              );
-                            }),
+                          physics: ScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: eventsList.length,
+                          itemBuilder: (BuildContext ctxt, int index) {
+                            return BuildEventItem(
+                              eventBean: eventsList[index],
+                              screenWidth: screenWidth,
+                              screenHeight: screenHeight,
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ],
@@ -159,8 +159,9 @@ class _EventScreenState extends State<EventScreen> {
               children: [
                 Center(
                   child: CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(MyColor.redSecondary),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      MyColor.redSecondary,
+                    ),
                   ),
                 ),
               ],

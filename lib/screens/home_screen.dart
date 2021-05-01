@@ -106,12 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
     await defaultYearRef.get().then((value) {
       eventYear = value.get('event_year');
       speakerYear = value.get('speaker_year');
-      print(eventYear + '*********************************************');
-      print(speakerYear + '*********************************************');
-      print(speakerAllYears.toString() +
-          '*********************************************');
-      print(eventAllYears.toString() +
-          '*********************************************');
     });
     setState(() {
       dataArrived = true;

@@ -56,10 +56,11 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => SpeakerScreen(
-                  year: choice,
-                  allYears: widget.allYears,
-                )),
+          builder: (context) => SpeakerScreen(
+            year: choice,
+            allYears: widget.allYears,
+          ),
+        ),
       );
     }
 

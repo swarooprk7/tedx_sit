@@ -32,11 +32,8 @@ class _TeamMembersState extends State<TeamMembers> {
         .collection('tedx_sit')
         .doc(documentName)
         .collection('team_members');
-    print(collectionReference.toString() + '*//////////');
     DocumentReference others = collectionReference.doc('others');
-
     CollectionReference colRef = others.collection(collectionName);
-    print(colRef.toString() + '*******');
 
     await colRef.orderBy('priority').get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {

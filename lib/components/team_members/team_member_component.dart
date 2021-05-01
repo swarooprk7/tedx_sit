@@ -30,16 +30,17 @@ class TeamMembersComponents extends StatelessWidget {
             height: 15.0,
           ),
           ListView.builder(
-              physics: ScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: dataList.length,
-              itemBuilder: (BuildContext ctxt, int index) {
-                return TeamMemberListBuilder(
-                    name: dataList[index].name,
-                    designation: dataList[index].designation,
-                    linkdnID: dataList[index].linkDnURL);
-              }),
+            physics: ScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: dataList.length,
+            itemBuilder: (BuildContext ctxt, int index) {
+              return TeamMemberListBuilder(
+                  name: dataList[index].name,
+                  designation: dataList[index].designation,
+                  linkdnID: dataList[index].linkDnURL);
+            },
+          ),
         ],
       ),
     );
