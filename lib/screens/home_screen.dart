@@ -274,23 +274,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: Column(
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  Resource.string.main,
-                                  style: TextStyle(
-                                    color: MyColor.redSecondary,
-                                    fontSize: 40,
-                                  ),
-                                ),
-                                Text(
-                                  Resource.string.conference,
-                                  style: TextStyle(
-                                    color: MyColor.primaryTheme,
-                                    fontSize: 40,
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              Resource.string.main,
+                              style: TextStyle(
+                                color: MyColor.redSecondary,
+                                fontSize: 40,
+                              ),
+                            ),
+                            Text(
+                              Resource.string.conference,
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                color: MyColor.primaryTheme,
+                                fontSize: 40,
+                              ),
                             ),
                             SizedBox(
                               height: 5,

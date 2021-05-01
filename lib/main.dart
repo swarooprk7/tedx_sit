@@ -6,11 +6,6 @@ import 'package:tedx_sit/resources/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays(
-    [
-      SystemUiOverlay.bottom,
-    ],
-  );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -37,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TEDX'),
+        title: Text('TEDX',),
       ),
       body: Center(
         child: Text(
