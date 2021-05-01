@@ -78,7 +78,7 @@ class CustomDrawer extends StatelessWidget {
               ),
               DrawerItem(
                 drawerItemBean: DrawerItemBean(
-                  icon: FontAwesomeIcons.clock,
+                  icon: FontAwesomeIcons.user,
                   title: 'Our Speakers',
                   onTap: () {
                     MyNavigation().pop(context: context);
