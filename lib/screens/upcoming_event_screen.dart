@@ -48,7 +48,16 @@ class _UpcomingEventScreenState extends State<UpcomingEventScreen> {
     setState(() {
       themeTitle = themeData['title'];
       themeSubtitle = themeData['subtitle'];
-      themeImage = themeData['image'];
+    });
+    await FirebaseFirestore.instance
+        .collection('tedx_sit')
+        .doc('home')
+        .collection('theme_image')
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        themeImage = element.data().values.first;
+      });
     });
     CollectionReference collectionReference = FirebaseFirestore.instance
         .collection('tedx_sit')
