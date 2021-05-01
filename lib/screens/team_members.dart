@@ -32,11 +32,8 @@ class _TeamMembersState extends State<TeamMembers> {
         .collection('tedx_sit')
         .doc(documentName)
         .collection('team_members');
-    print(collectionReference.toString() + '*//////////');
     DocumentReference others = collectionReference.doc('others');
-
     CollectionReference colRef = others.collection(collectionName);
-    print(colRef.toString() + '*******');
 
     await colRef.orderBy('priority').get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
@@ -120,14 +117,14 @@ class _TeamMembersState extends State<TeamMembers> {
         ),
       ),
       backgroundColor: MyColor.blackBG,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: screenWidth * 0.03,
-          ),
-          child: Container(
-            child: dataArrived == true
-                ? Column(
+      body: dataArrived
+          ? SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.03,
+                ),
+                child: Container(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -200,11 +197,22 @@ class _TeamMembersState extends State<TeamMembers> {
                         dataList: operationsList,
                       ),
                     ],
-                  )
-                : Center(child: CircularProgressIndicator()),
-          ),
-        ),
-      ),
+                  ),
+                ),
+              ),
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(MyColor.redSecondary),
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

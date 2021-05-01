@@ -1,5 +1,4 @@
 class MyString {
-  //Home screen
   String get whatIs => 'What is ';
   String get tedx => 'TEDx';
   String get engagement => 'Engagement';

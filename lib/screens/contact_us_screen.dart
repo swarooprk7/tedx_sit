@@ -74,15 +74,15 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         ),
       ),
       backgroundColor: MyColor.blackBG,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: screenWidth * 0.03,
-            vertical: screenHeight * 0.04,
-          ),
-          child: Container(
-            child: (dataArrived)
-                ? Column(
+      body: (dataArrived)
+          ? SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.03,
+                  vertical: screenHeight * 0.04,
+                ),
+                child: Container(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
@@ -212,13 +212,22 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         ],
                       ),
                     ],
-                  )
-                : Center(
-                    child: CircularProgressIndicator(),
                   ),
-          ),
-        ),
-      ),
+                ),
+              ),
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(MyColor.redSecondary),
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

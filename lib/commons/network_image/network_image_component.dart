@@ -66,13 +66,6 @@ class MyClipper extends CustomClipper<Rect> {
       width,
       height,
     );
-//    final epicenter = Offset(size.width, size.height);
-//    // Calculate distance from epicenter to the top left corner to make sure clip the image into circle.
-//    final distanceToCorner = epicenter.dy;
-//    final radius = distanceToCorner;
-//    final diameter = radius;
-//    return Rect.fromLTWH(
-//        epicenter.dx - radius, epicenter.dy - radius, diameter, diameter);
   }
 
   @override

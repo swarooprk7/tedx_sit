@@ -80,9 +80,8 @@ class _SpeakerComponentState extends State<SpeakerComponent> {
         ),
         if (isSelected)
           Container(
-            padding: EdgeInsets.only(left: 8.0, right: 1.0),
-            margin:
-                EdgeInsets.only(left: 4.0, right: 1.0, top: 4.0, bottom: 4.0),
+            padding: EdgeInsets.all(4.0),
+            margin: EdgeInsets.all(4.0),
             child: Text(
               widget.speakersBean.briefInfo,
               textAlign: TextAlign.justify,

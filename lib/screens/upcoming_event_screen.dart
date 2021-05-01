@@ -104,14 +104,14 @@ class _UpcomingEventScreenState extends State<UpcomingEventScreen> {
         ),
       ),
       backgroundColor: MyColor.blackBG,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: screenHeight * 0.04,
-          ),
-          child: Container(
-            child: (dataArrived)
-                ? Column(
+      body: dataArrived
+          ? SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: screenHeight * 0.04,
+                ),
+                child: Container(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
@@ -235,13 +235,22 @@ class _UpcomingEventScreenState extends State<UpcomingEventScreen> {
                         ),
                       ),
                     ],
-                  )
-                : Center(
-                    child: CircularProgressIndicator(),
                   ),
-          ),
-        ),
-      ),
+                ),
+              ),
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(MyColor.redSecondary),
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

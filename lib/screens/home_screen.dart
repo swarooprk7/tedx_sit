@@ -17,6 +17,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String speakerYear;
+  String eventYear;
+  List<String> eventAllYears = [];
+  List<String> speakerAllYears = [];
+
   String whatIsTedx;
   String engagement;
   String mainConference;
@@ -30,6 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List imagesList = [];
   Future<void> readData() async {
+    DocumentReference defaultYearRef = FirebaseFirestore.instance
+        .collection('tedx_sit')
+        .doc('default_year_set');
+
     DocumentReference homeRef =
         FirebaseFirestore.instance.collection('tedx_sit').doc('home');
 
@@ -83,6 +92,21 @@ class _HomeScreenState extends State<HomeScreen> {
         .then((value) {
       youtubeViews = value.get('count');
     });
+
+    await defaultYearRef.collection('event_year_history').get().then((value) {
+      value.docs.forEach((element) {
+        if (element['to_show']) eventAllYears.add(element['year']);
+      });
+    });
+    await defaultYearRef.collection('speaker_year_history').get().then((value) {
+      value.docs.forEach((element) {
+        if (element['to_show']) speakerAllYears.add(element['year']);
+      });
+    });
+    await defaultYearRef.get().then((value) {
+      eventYear = value.get('event_year');
+      speakerYear = value.get('speaker_year');
+    });
     setState(() {
       dataArrived = true;
     });
@@ -98,7 +122,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: CustomDrawer(),
+        drawer: CustomDrawer(
+          eventAllYear: eventAllYears,
+          eventYear: eventYear,
+          speakerAllYear: speakerAllYears,
+          speakerYear: speakerYear,
+        ),
         appBar: AppBar(
           elevation: 10,
           centerTitle: true,
@@ -110,13 +139,13 @@ class _HomeScreenState extends State<HomeScreen> {
           toolbarHeight: 80,
         ),
         backgroundColor: MyColor.blackBG,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 20,
-            ),
-            child: dataArrived
-                ? Column(
+        body: dataArrived
+            ? SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 20,
+                  ),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.network(
@@ -324,12 +353,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ],
-                  )
-                : Center(
-                    child: CircularProgressIndicator(),
                   ),
-          ),
-        ),
+                ),
+              )
+            : Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(MyColor.redSecondary),
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }
