@@ -5,8 +5,6 @@ import 'package:tedx_sit/components/drawer_item/drawer_item_bean.dart';
 import 'package:tedx_sit/resources/color.dart';
 import 'package:tedx_sit/resources/navigation.dart';
 import 'package:tedx_sit/resources/route.dart';
-import 'package:tedx_sit/screens/events.dart';
-import 'package:tedx_sit/screens/speakers_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   final String speakerYear;
@@ -65,13 +63,9 @@ class CustomDrawer extends StatelessWidget {
                   title: 'Past events',
                   onTap: () {
                     MyNavigation().pop(context: context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EventScreen(
-                                allYears: eventAllYear,
-                                year: eventYear,
-                              )),
+                    MyNavigation().push(
+                      context: context,
+                      screen: MyRoute.events,
                     );
                   },
                 ),
@@ -82,13 +76,9 @@ class CustomDrawer extends StatelessWidget {
                   title: 'Our Speakers',
                   onTap: () {
                     MyNavigation().pop(context: context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SpeakerScreen(
-                                allYears: speakerAllYear,
-                                year: speakerYear,
-                              )),
+                    MyNavigation().push(
+                      context: context,
+                      screen: MyRoute.speakerScreen,
                     );
                   },
                 ),

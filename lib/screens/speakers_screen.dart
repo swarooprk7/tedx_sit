@@ -7,25 +7,39 @@ import 'package:tedx_sit/components/speakers/speakers_components.dart';
 import 'package:tedx_sit/resources/color.dart';
 
 class SpeakerScreen extends StatefulWidget {
-  final String year;
-  final List<String> allYears;
-  SpeakerScreen({
-    this.year = '2020',
-    this.allYears,
-  });
-
   @override
   _SpeakerScreenState createState() => _SpeakerScreenState();
 }
 
 class _SpeakerScreenState extends State<SpeakerScreen> {
+  String yearString = '';
+  String year;
+  List<String> allYears = [];
   bool dataArrived = false;
   List<SpeakersBean> speakersList = [];
 
-  Future<void> readDate() async {
+  Future<void> readInitialData(String yearArg) async {
+    DocumentReference defaultYearRef = FirebaseFirestore.instance
+        .collection('tedx_sit')
+        .doc('default_year_set');
+    await defaultYearRef.collection('speaker_year_history').get().then((value) {
+      value.docs.forEach((element) {
+        if (element['to_show']) allYears.add(element['year']);
+      });
+    });
+    await defaultYearRef.get().then((value) {
+      year = value.get(yearArg);
+    });
+    setState(() {
+      yearString = year;
+    });
+    readData();
+  }
+
+  Future<void> readData() async {
     CollectionReference collectionReference = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc(widget.year)
+        .doc(year)
         .collection('speakers');
     await collectionReference.orderBy('priority').get().then((value) {
       value.docs.forEach((element) {
@@ -36,7 +50,9 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
           briefInfo: dataMap['info'],
           imageURL: dataMap['image_url'],
         );
-        speakersList.add(bean);
+        setState(() {
+          speakersList.add(bean);
+        });
       });
     });
     setState(() {
@@ -46,56 +62,55 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
 
   @override
   void initState() {
-    readDate();
+    readInitialData('speaker_year');
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     void choiceAction(String choice) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SpeakerScreen(
-            year: choice,
-            allYears: widget.allYears,
-          ),
-        ),
-      );
+      setState(() {
+        year = choice;
+        yearString = choice;
+        speakersList.clear();
+        dataArrived = false;
+        readData();
+      });
     }
 
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.light,
         centerTitle: true,
         backgroundColor: MyColor.blackBG,
         title: Text(
-          'Speakers - ${widget.year}',
+          'Speakers $yearString',
           style: TextStyle(
             color: MyColor.redSecondary,
             fontSize: screenHeight * 0.035,
           ),
         ),
         actions: [
-          PopupMenuButton<String>(
-            color: MyColor.black,
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context) {
-              return widget.allYears.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(
-                    choice,
-                    style: TextStyle(
-                      color: MyColor.primaryTheme,
-                    ),
-                  ),
-                );
-              }).toList();
-            },
-          ),
+          (dataArrived)
+              ? PopupMenuButton<String>(
+                  color: MyColor.black,
+                  onSelected: choiceAction,
+                  itemBuilder: (BuildContext context) {
+                    return allYears.map((String choice) {
+                      return PopupMenuItem<String>(
+                        value: choice,
+                        child: Text(
+                          choice,
+                          style: TextStyle(
+                            color: MyColor.primaryTheme,
+                          ),
+                        ),
+                      );
+                    }).toList();
+                  },
+                )
+              : Container(),
         ],
       ),
       backgroundColor: MyColor.blackBG,

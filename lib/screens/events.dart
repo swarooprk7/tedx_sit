@@ -8,30 +8,45 @@ import 'package:tedx_sit/components/event/event_component.dart';
 import 'package:tedx_sit/resources/color.dart';
 
 class EventScreen extends StatefulWidget {
-  final String year;
-  final List<String> allYears;
-  EventScreen({
-    this.year = '2019',
-    this.allYears,
-  });
-
   @override
   _EventScreenState createState() => _EventScreenState();
 }
 
 class _EventScreenState extends State<EventScreen> {
+  String yearString = '';
+  String year;
+  List<String> allYears = [];
   bool dataArrived = false;
-  String theme;
+
+  String theme = '';
   List<EventBean> eventsList = [];
+
+  DocumentReference defaultYearRef =
+      FirebaseFirestore.instance.collection('tedx_sit').doc('default_year_set');
+
+  Future<void> readInitialData() async {
+    await defaultYearRef.get().then((value) {
+      year = value.get('event_year');
+    });
+    await defaultYearRef.collection('event_year_history').get().then((value) {
+      value.docs.forEach((element) {
+        if (element['to_show']) allYears.add(element['year']);
+      });
+    });
+    setState(() {
+      yearString = year;
+    });
+    readData();
+  }
 
   Future<void> readData() async {
     CollectionReference eventRef = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc(widget.year)
+        .doc(year)
         .collection('events');
     CollectionReference themeRef = FirebaseFirestore.instance
         .collection('tedx_sit')
-        .doc(widget.year)
+        .doc(year)
         .collection('theme');
     await eventRef.orderBy('priority').get().then((value) {
       value.docs.forEach((element) {
@@ -41,12 +56,14 @@ class _EventScreenState extends State<EventScreen> {
           name: element['name'],
           imageURL: element['image_url'],
         );
-        eventsList.add(bean);
+        setState(() {
+          eventsList.add(bean);
+        });
       });
     });
     await themeRef.get().then((value) {
       value.docs.forEach((element) {
-        theme = element['name'];
+        theme = element['title'] + ' ' + element['subtitle'];
       });
     });
     setState(() {
@@ -56,24 +73,23 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   void initState() {
-    readData();
+    readInitialData();
     super.initState();
+  }
+
+  void choiceAction(String choice) async {
+    setState(() {
+      year = choice;
+      yearString = choice;
+      eventsList.clear();
+      dataArrived = false;
+      theme = '';
+      readData();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    void choiceAction(String choice) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EventScreen(
-            year: choice,
-            allYears: widget.allYears,
-          ),
-        ),
-      );
-    }
-
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -91,30 +107,31 @@ class _EventScreenState extends State<EventScreen> {
         centerTitle: true,
         backgroundColor: MyColor.blackBG,
         title: Text(
-          'Events  ' + widget.year,
+          'Events $yearString',
           style: TextStyle(
             color: MyColor.redSecondary,
             fontSize: screenHeight * 0.035,
           ),
         ),
         actions: [
-          PopupMenuButton<String>(
-            color: MyColor.black,
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context) {
-              return widget.allYears.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(
-                    choice,
-                    style: TextStyle(
-                      color: MyColor.primaryTheme,
+          if (dataArrived)
+            PopupMenuButton<String>(
+              color: MyColor.black,
+              onSelected: choiceAction,
+              itemBuilder: (BuildContext context) {
+                return allYears.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(
+                      choice,
+                      style: TextStyle(
+                        color: MyColor.primaryTheme,
+                      ),
                     ),
-                  ),
-                );
-              }).toList();
-            },
-          ),
+                  );
+                }).toList();
+              },
+            ),
         ],
       ),
       body: dataArrived
@@ -131,8 +148,7 @@ class _EventScreenState extends State<EventScreen> {
                         BuildText(
                           screenHeight: screenHeight,
                           lhs: 'TEDx',
-                          rhs:
-                              'SiddagangaInstituteofTechnology - ${widget.year}',
+                          rhs: 'SiddagangaInstituteofTechnology  ' + yearString,
                         ),
                         SizedBox(height: 10.0),
                         BuildText(
@@ -142,23 +158,25 @@ class _EventScreenState extends State<EventScreen> {
                         ),
                       ],
                     ),
-                    Column(
-                      children: [
-                        ListView.builder(
-                          physics: ScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: eventsList.length,
-                          itemBuilder: (BuildContext ctxt, int index) {
-                            return BuildEventItem(
-                              eventBean: eventsList[index],
-                              screenWidth: screenWidth,
-                              screenHeight: screenHeight,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                    dataArrived
+                        ? Column(
+                            children: [
+                              ListView.builder(
+                                physics: ScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: eventsList.length,
+                                itemBuilder: (BuildContext ctxt, int index) {
+                                  return BuildEventItem(
+                                    eventBean: eventsList[index],
+                                    screenWidth: screenWidth,
+                                    screenHeight: screenHeight,
+                                  );
+                                },
+                              ),
+                            ],
+                          )
+                        : Container(),
                   ],
                 ),
               ),
