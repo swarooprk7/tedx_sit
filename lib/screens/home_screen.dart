@@ -45,6 +45,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
     CollectionReference detailRef = homeRef.collection('details');
 
+    await defaultYearRef.collection('event_year_history').get().then((value) {
+      value.docs.forEach((element) {
+        if (element['to_show']) eventAllYears.add(element['year']);
+      });
+    });
+    await defaultYearRef.collection('speaker_year_history').get().then((value) {
+      value.docs.forEach((element) {
+        if (element['to_show']) speakerAllYears.add(element['year']);
+      });
+    });
+    await defaultYearRef.get().then((value) {
+      eventYear = value.get('event_year');
+      speakerYear = value.get('speaker_year');
+    });
+
     await homeRef.collection('theme_image').get().then((value) {
       value.docs.forEach((element) {
         themeImage = element.data().values.first;
@@ -94,20 +109,6 @@ class _HomeScreenState extends State<HomeScreen> {
       youtubeViews = value.get('count');
     });
 
-    await defaultYearRef.collection('event_year_history').get().then((value) {
-      value.docs.forEach((element) {
-        if (element['to_show']) eventAllYears.add(element['year']);
-      });
-    });
-    await defaultYearRef.collection('speaker_year_history').get().then((value) {
-      value.docs.forEach((element) {
-        if (element['to_show']) speakerAllYears.add(element['year']);
-      });
-    });
-    await defaultYearRef.get().then((value) {
-      eventYear = value.get('event_year');
-      speakerYear = value.get('speaker_year');
-    });
     setState(() {
       dataArrived = true;
     });
@@ -121,12 +122,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarIconBrightness: Brightness.light,
-        statusBarBrightness: Brightness.light,
-      ),
-    );
     return SafeArea(
       child: Scaffold(
         drawer: CustomDrawer(

@@ -62,12 +62,6 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarIconBrightness: Brightness.light,
-        statusBarBrightness: Brightness.light,
-      ),
-    );
     void choiceAction(String choice) {
       Navigator.pushReplacement(
         context,
@@ -86,6 +80,14 @@ class _EventScreenState extends State<EventScreen> {
       backgroundColor: MyColor.blackBG,
       appBar: AppBar(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarDividerColor: Colors.black,
+          systemNavigationBarColor: Colors.black,
+          statusBarColor: Colors.black,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+        ),
         centerTitle: true,
         backgroundColor: MyColor.blackBG,
         title: Text(
