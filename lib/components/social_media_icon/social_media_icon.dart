@@ -14,7 +14,7 @@ class SocialMediaIcon extends StatelessWidget {
       child: Icon(
         socialMediaIconBean.icon,
         color: MyColor.primaryTheme,
-        size: 40,
+        size: 35,
       ),
     );
   }

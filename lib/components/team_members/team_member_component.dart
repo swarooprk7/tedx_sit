@@ -99,7 +99,7 @@ class TeamMemberListBuilder extends StatelessWidget {
           ),
           Row(
             children: [
-              if (linkdnID != null)
+              if (linkdnID.toString().length > 4)
                 Container(
                   padding: EdgeInsets.all(4.0),
                   child: InkWell(

@@ -28,6 +28,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   String linkedIn;
   String anoopId;
   String swaroopId;
+  String website;
   bool dataArrived = false;
 
   Future<void> readData() async {
@@ -47,6 +48,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       linkedIn = data['linkedin'];
       anoopId = data['anoopIn'];
       swaroopId = data['swaroopIn'];
+      website = data['website'];
       dataArrived = true;
     });
   }
@@ -171,6 +173,16 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          SocialMediaIcon(
+                            socialMediaIconBean: SocialMediaIconBean(
+                              icon: FontAwesomeIcons.globe,
+                              onTap: () {
+                                UrlLauncher.launch(
+                                  website,
+                                );
+                              },
+                            ),
+                          ),
                           SocialMediaIcon(
                             socialMediaIconBean: SocialMediaIconBean(
                               icon: FontAwesomeIcons.facebookF,

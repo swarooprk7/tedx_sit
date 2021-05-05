@@ -19,12 +19,15 @@ class _TeamMembersState extends State<TeamMembers> {
   bool dataArrived = false;
   OrganizersBean organizersBean;
   OrganizersBean coOrganizersBean;
+  OrganizersBean presidentBean;
+  OrganizersBean vicePresidentBean;
   TeamMembersBean teamMembersBean;
   List<TeamMembersBean> artAndDesignList = [];
   List<TeamMembersBean> budgetAndFinanceList = [];
   List<TeamMembersBean> curatorsList = [];
   List<TeamMembersBean> marketingAndPromotionsList = [];
   List<TeamMembersBean> operationsList = [];
+  List<TeamMembersBean> freshersList = [];
   List<TeamMembersBean> technicalTeamList = [];
 
   Future<void> readOthersData(
@@ -57,6 +60,8 @@ class _TeamMembersState extends State<TeamMembers> {
     DocumentReference aboutUs = collectionReference.doc('about_us');
     DocumentReference organizer = collectionReference.doc('organizer');
     DocumentReference coOrganizer = collectionReference.doc('co_organizer');
+    DocumentReference president = collectionReference.doc('president');
+    DocumentReference vicePresident = collectionReference.doc('vice_president');
 
     await aboutUs.get().then((value) {
       value.data().forEach((key, value) {
@@ -82,6 +87,24 @@ class _TeamMembersState extends State<TeamMembers> {
       );
       coOrganizersBean = bean;
     });
+    await president.get().then((value) {
+      OrganizersBean bean = OrganizersBean(
+        title: value.get('name'),
+        description: value.get('designation'),
+        imageURL: value.get('image_url'),
+        linkDnURL: value.get('linkdn_url'),
+      );
+      presidentBean = bean;
+    });
+    await vicePresident.get().then((value) {
+      OrganizersBean bean = OrganizersBean(
+        title: value.get('name'),
+        description: value.get('designation'),
+        imageURL: value.get('image_url'),
+        linkDnURL: value.get('linkdn_url'),
+      );
+      vicePresidentBean = bean;
+    });
 
     setState(() {
       dataArrived = true;
@@ -97,6 +120,7 @@ class _TeamMembersState extends State<TeamMembers> {
     readOthersData('marketing_and_promotions', marketingAndPromotionsList);
     readOthersData('operations', operationsList);
     readOthersData('technical_team', technicalTeamList);
+    readOthersData('freshers', freshersList);
     super.initState();
   }
 
@@ -169,6 +193,16 @@ class _TeamMembersState extends State<TeamMembers> {
                       OrganizerComponent(
                         screenWidth: screenWidth,
                         screenHeight: screenHeight,
+                        organizersBean: presidentBean,
+                      ),
+                      OrganizerComponent(
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
+                        organizersBean: vicePresidentBean,
+                      ),
+                      OrganizerComponent(
+                        screenWidth: screenWidth,
+                        screenHeight: screenHeight,
                         organizersBean: coOrganizersBean,
                       ),
                       SizedBox(
@@ -197,6 +231,10 @@ class _TeamMembersState extends State<TeamMembers> {
                       TeamMembersComponents(
                         heading: 'Operations',
                         dataList: operationsList,
+                      ),
+                      TeamMembersComponents(
+                        heading: 'Freshers',
+                        dataList: freshersList,
                       ),
                     ],
                   ),
